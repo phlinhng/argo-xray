@@ -25,8 +25,8 @@ cat > "./etc/xray-config.json" <<-EOF
           "alpn": ["http/2"],
           "certificates": [
             {
-              "certificateFile": "/etc/xray.crt",
-              "keyFile": "/etc/xray.key"
+              "certificateFile": "./etc/xray.crt",
+              "keyFile": "./etc/xray.key"
             }
           ]
         },
