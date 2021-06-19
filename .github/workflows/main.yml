@@ -31,9 +31,7 @@ jobs:
           echo "${{ secrets.XRAY_TLS_CERT }}" > ./etc/xray.crt
           echo "${{ secrets.XRAY_TLS_KEY }}" > ./etc/xray.key
           bash xray-config.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_GRPC_SERVICENAME }}
-      - name: Start Argo Tunnel
+      - name: Start
         run: |
           ./cloudflared --credentials-file ./.cloudflared/cert.pem ${{ secrets.ARGO_TUNNEL_NAME }} tunnel run --url localhost:2083 &
-      - name: Start Xray-Core
-        run: |
           ./xray run -config ./etc/xray-config.json
