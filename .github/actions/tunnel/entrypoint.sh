@@ -38,7 +38,8 @@ cat > "/xray-config.json" <<-EOF
           {
             "id": "$XRAY_VLESS_UUID"
           }
-        ]
+        ],
+        "decryption": "none"
       },
       "streamSettings": {
         "network": "grpc",
