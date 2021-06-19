@@ -12,8 +12,6 @@ jobs:
     name: Tunnelling Traffic
     timeout-minutes: 60
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: Get latest version tags
         run: |
           echo "::set-output name=ARGO_VERSION::`curl -s https://api.github.com/repos/cloudflare/cloudflared/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"(.*)".*/\1/'`"
@@ -21,13 +19,14 @@ jobs:
         id: fetch-latest-tag
       - name: Download binaries
         run: |
-          mkdir cwd && mv xray-config.sh ./cwd && cd cwd
+          mkdir cwd && cd cwd
           curl -fsSL https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz -o cloudflared-stable-linux-amd64.tgz
           tar -xf cloudflared-stable-linux-amd64.tgz
           chmod +x cloudflared
           curl -fsSL https://github.com/XTLS/xray-core/releases/download/v${{ steps.fetch-latest-tag.outputs.XRAY_VERSION }}/Xray-linux-64.zip -o Xray-linux-64.zip
           unzip -qq -o Xray-linux-64.zip
           chmod +x xray
+          curl -fsSL https://raw.githubusercontent.com/phlinhng/argo-xray/main/xray-config.sh -o xray-config.sh
       - name: Prepare configurations
         run: |
           mkdir ./.cloudflared
