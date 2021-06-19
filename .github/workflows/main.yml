@@ -38,4 +38,5 @@ jobs:
       - name: Start server
         run: |
           ./xray run -config ./etc/xray-config.json &
-          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem --hostname ${{ secrets.ARGO_TUNNEL_DOMAIN }} --url localhost:2083 run argoxray
+          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem --hostname ${{ secrets.ARGO_TUNNEL_DOMAIN }} \\
+          --http-host-header ${{ secrets.ARGO_TUNNEL_DOMAIN }} --url localhost:2083 run argoxray
