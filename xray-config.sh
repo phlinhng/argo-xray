@@ -19,10 +19,9 @@ cat > "./etc/xray-config.json" <<-EOF
         "decryption": "none"
       },
       "streamSettings": {
-        "network": "grpc",
+        "network": "ws",
         "security": "tls",
         "tlsSettings": {
-          "alpn": ["http/2"],
           "certificates": [
             {
               "certificateFile": "./etc/xray.crt",
@@ -30,8 +29,8 @@ cat > "./etc/xray-config.json" <<-EOF
             }
           ]
         },
-        "grpcSettings": {
-          "serviceName": "$XRAY_GRPC_SERVICENAME"
+        "wsSettings": {
+          "path": "/$XRAY_GRPC_SERVICENAME"
         }
       },
       "sniffing": {
