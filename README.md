@@ -41,7 +41,7 @@ cloudflared tunnel login
 > 端口: 2083 <br>
 > 协议: VLESS <br>
 > UUID: 你设定的值 <br>
-> 传输方式: ws <br>
+> 传输方式: grpc <br>
 > path: 你设定的值<br>
 
 ## 注
