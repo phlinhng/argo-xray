@@ -33,7 +33,7 @@ jobs:
           bash xray-config.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_GRPC_SERVICENAME }}
       - name: Start Argo Tunnel
         run: |
-          cloudflared tunnel run --url localhost:443 ${{ secrets.ARGO_TUNNEL_NAME }} &
+          ./cloudflared tunnel run --url localhost:443 ${{ secrets.ARGO_TUNNEL_NAME }} &
       - name: Start Xray-Core
         run: |
-          xray run -config ./etc/xray-config.json
+          ./xray run -config ./etc/xray-config.json
