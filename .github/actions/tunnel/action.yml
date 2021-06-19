@@ -7,10 +7,6 @@ inputs:
   ARGO_TUNNEL_TOKEN:
     description: "credential files of your argo tunnel"
     required: true
-  ARGO_VERSION:
-    description: "version tags of argo release"
-    required: false
-    defailt: "2021.5.10"
   XRAY_VLESS_UUID:
     description: "uuid for your VLESS connection"
     required: true
@@ -34,7 +30,6 @@ runs:
   args:
     - ${{ inputs.ARGO_TUNNEL_NAME }}
     - ${{ inputs.ARGO_TUNNEL_TOKEN }}
-    - ${{ inputs.ARGO_VERSION }}
     - ${{ inputs.XRAY_VLESS_UUID }}
     - ${{ inputs.XRAY_TLS_CERT }}
     - ${{ inputs.XRAY_TLS_KEY }}
