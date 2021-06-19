@@ -31,6 +31,7 @@ jobs:
       - name: Prepare configurations
         run: |
           mkdir ./.cloudflared
+          echo "test"
           echo ${{ secrets.ARGO_TUNNEL_TOKEN }} > ./.cloudflared/cert.pem
           mkdir ./etc
           echo ${{ secrets.XRAY_TLS_CERT }} > ./etc/xray.crt
