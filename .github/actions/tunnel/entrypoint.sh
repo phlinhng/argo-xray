@@ -18,7 +18,7 @@ echo $ARGO_TLS_TOKEN > /root/.cloudflared/cert.pem
 
 # Install Xray-core
 curl -L https://github.com/XTLS/xray-core/releases/download/v${XRAY_VERSION}/Xray-linux-64.zip -o Xray-linux-64.zip
-unzip -qq Xray-linux-64.zip
+unzip -qq -o Xray-linux-64.zip
 mv xray /usr/bin/xray && chmod /usr/bin/xray
 mv geo*.dat /usr/bin
 
