@@ -52,7 +52,7 @@ cat > "/xray-config.json" <<-EOF
               "keyFile": "/etc/xray.key"
             }
           ]
-        }
+        },
         "grpcSettings": {
           "serviceName": "$XRAY_GRPC_SERVICENAME"
         }
