@@ -34,4 +34,4 @@ jobs:
       - name: Start Server
         run: |
           ./xray run -config ./etc/xray-config.json &
-          ./cloudflared --credentials-file ./.cloudflared/cert.pem ${{ secrets.ARGO_TUNNEL_NAME }} tunnel run --url tcp://localhost:2083 &
+          ./cloudflared --credentials-file ./.cloudflared/cert.pem ${{ secrets.ARGO_TUNNEL_NAME }} tunnel run --url tcp://localhost:2083
