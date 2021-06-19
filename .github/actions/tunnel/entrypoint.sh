@@ -97,5 +97,7 @@ cat > "/xray-config.json" <<-EOF
 }
 EOF
 
+echo "$XRAY_VLESS_UUID"
+
 xray run -config /xray-config.json
 #cloudflared tunnel run --url localhost:443 $ARGO_TUNNEL_NAME
