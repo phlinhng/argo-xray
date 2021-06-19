@@ -2,7 +2,7 @@
 
 ARGO_TUNNEL_NAME=$1
 ARGO_VERSION=$2
-XRAY_VLESS_UUID="9b126157-a9a5-4823-be86-5aaa21284749"
+XRAY_VLESS_UUID=$3
 XRAY_XRAY_TLS_CERT=$4
 XRAY_XRAY_TLS_KEY=$5
 XRAY_GRPC_SERVICENAME=$6
@@ -92,6 +92,9 @@ cat > "/xray-config.json" <<-EOF
       "outboundTag": "blocked"
       }
     ]
+  },
+  "log": {
+    "loglevel": "info"
   }
 }
 EOF
