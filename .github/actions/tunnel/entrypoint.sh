@@ -26,7 +26,7 @@ mv geo*.dat /usr/bin
 echo $XRAY_TLS_CERT > /etc/xray.crt
 echo $XRAY_TLS_KEY > /etc/xray.key
 
-cat > "/root/xray-config.json" <<-EOF
+cat > "/xray-config.json" <<-EOF
 {
   "inbounds": [
     {
