@@ -3,7 +3,7 @@
 XRAY_VLESS_UUID=$1
 XRAY_GRPC_SERVICENAME=$2
 
-cat > "/xray-config.json" <<-EOF
+cat > "./etc/xray-config.json" <<-EOF
 {
   "inbounds": [
     {
