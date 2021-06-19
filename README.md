@@ -44,13 +44,13 @@ cloudflared tunnel route dns EXAMPLE_NAME tunnel.your-domain.com
 设置路径：Repo 页面 → Settings → Secret → New Repository secrets
 
 ### 7. 连接到 Github Action 容器
-使用支持 grpc 的 VLESS 客户端，以如下配置进行连接
+使用支持 ~~grpc~~ ws 的 VLESS 客户端，以如下配置进行连接
 > 入口地址: 你设定的 Argo 隧道域名 <br>
 > 端口: 2083 <br>
 > 协议: VLESS <br>
 > UUID: 你设定的值 <br>
-> 传输方式: grpc <br>
-> Service　Name: 你设定的值 <br>
+> 传输方式: ws <br>
+> ~~Service　Name: 你设定的值~~ <br>
 
 ## 注
 本项目仅供学习 Cloudflare Argo Tunnel 与 Github Action 的操作，所生成的隧道最长运行 1 小时且仅在 push 时触发，若有持续使用的需求请自行修改触发条件。请评估风险后合理使用本项目，任何因滥用本项目造成的后果均与本项目无关。
