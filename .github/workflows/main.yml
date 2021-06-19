@@ -26,13 +26,17 @@ jobs:
           unzip -qq -o Xray-linux-64.zip
           chmod +x cloudflared && chmod +x xray
           mkdir ./.cloudflared
-          echo "${{ secrets.ARGO_TUNNEL_CRED }}" | tee ./.cloudflared/cred.json
           echo "${{ secrets.ARGO_TUNNEL_TOKEN }}" > ./.cloudflared/cert.pem
           mkdir mkdir ./etc
           echo "${{ secrets.XRAY_TLS_CERT }}" > ./etc/xray.crt
           echo "${{ secrets.XRAY_TLS_KEY }}" > ./etc/xray.key
           bash xray-config.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_GRPC_SERVICENAME }}
+      - name: Create tunnel
+        run: |
+          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem delete argoxray
+          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem create argoxray
+          ./cloudflared tunnel --origincert route dns argoxray ${{ secrets.ARGO_TUNNEL_DOMAIN }}
       - name: Start Server
         run: |
           ./xray run -config ./etc/xray-config.json &
-          ./cloudflared --cred-file ./.cloudflared/cred.json tunnel --origincert ./.cloudflared/cert.pem  run --url localhost:2083 ${{ secrets.ARGO_TUNNEL_NAME }}
+          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem run --url localhost:2083 argoxray

@@ -16,29 +16,17 @@ wget https://github.com/cloudflare/cloudflared/releases/download/2021.5.10/cloud
 cloudflared tunnel login
 ```
 用浏览器打开给出的网址，登入你的 Cloudflare 帐户，授权一个区域使用 Argo Tunnel。成功后会在你的 Linux 环境生成一个`~/.cloudflared`目录。保存 `~/.cloudflared/cert.pem` 和 `~/.cloudflared/[tunnel-id].json` 的内容，后面会用到。
-### 3. 建立一个隧道
-EXAMPLE_NAME 可以换成任意的自定义隧道名
-```sh
-cloudflared tunnel create EXAMPLE_NAME
-```
-成功的话会出现 `Created tunnel EXAMPLE_NAME with id xxxx`
-### 4. 将建立的隧道绑定至域名
-Argo tunnel 会提供一个 *.cfargotunnel.com 域名，这个域名无法申请证书，我们需要将隧道绑定至刚才授权的区域。
-```
-cloudflared tunnel route dns EXAMPLE_NAME tunnel.your-domain.com
-```
-### 5. 获取回源证书
+### 3. 获取回源证书
 因为我们要透过 Cloudflare 访问源站，申请 Cloudflare 的回源证书就够了（就是传说中的 15 年证书），推荐 key type 选 ECC。保存 PEM 类型的证书和私钥，后面会用到
 
 ## 使用方法
-### 6. Fork 本项目并添加以下的 Secret
+### 4. Fork 本项目并添加以下的 Secret
 | Name | Value | Source |
 |-|-|-|
 | ARGO_TUNNEL_TOKEN | 隧道密钥 | 2. 生成密钥 |
-| ARGO_TUNNEL_CRED | 隧道凭证 | 2. 生成密钥 |
-| ARGO_TUNNEL_NAME | 隧道名称 | 3. 建立一个隧道 |
-| XRAY_TLS_CERT | xray 证书公钥 | 5. 获取回源证书 |
-| XRAY_TLS_KEY | xray 证书私钥 | 5. 获取回源证书 |
+| ARGO_TUNNEL_DOMAIN | 隧道域名 | 2. 生成密钥 |
+| XRAY_TLS_CERT | xray 证书公钥 | 3. 获取回源证书 |
+| XRAY_TLS_KEY | xray 证书私钥 | 3. 获取回源证书 |
 | XRAY_VLESS_UUID | xray 的 service name | 自定义 |
 | XRAY_GRPC_SERVICENAME | grpc 的 service name | 自定义 |
 
@@ -50,7 +38,7 @@ cloudflared tunnel route dns EXAMPLE_NAME tunnel.your-domain.com
 > 端口: 2083 <br>
 > 协议: VLESS <br>
 > UUID: 你设定的值 <br>
-> 传输方式: ws <br>
+> 传输方式: grpc <br>
 > Service　Name: 你设定的值<br>
 
 ## 注
