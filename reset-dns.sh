@@ -1,4 +1,3 @@
-8a1447f17dfbe312f62a03f8129955a72418d
 #!/bin/bash
 
 zone_name=$1
