@@ -1,8 +1,22 @@
 #!/bin/sh
 
-ARGO_TUNNEL_NAME=$1
-XTLS_VLESS_UUID=$2
-XRAY_GRPC_SERVICENAME=$3
+# Install Argo Tunnel Client
+curl -fsSL https://github.com/cloudflare/cloudflared/releases/download/${ARGO_VERSION}/cloudflared-linux-amd64 -o /usr/bin/cloudflared
+chmod +x /usr/bin/cloudflared
+
+# Copy Argo TLS Token
+mkdir -p /root/.cloudflared
+echo $ARGO_TLS_TOKEN > /root/.cloudflared/cert.pem
+
+# Install Xray-core
+curl -fsSL https://github.com/XTLS/xray-core/releases/download/v${XRAY_VERSION}/Xray-linux-64.zip -o Xray-linux-64.zip
+unzip -qq Xray-linux-64.zip
+mv xray /usr/bin/xray && chmod /usr/bin/xray
+mv geo*.dat /usr/bin
+
+# Copy TLS cert and key
+echo $XRAY_TLS_CERT > /etc/xray.crt
+echo $XRAY_TLS_KEY > /etc/xray.key
 
 cat > "/root/xray-config.json" <<-EOF
 {

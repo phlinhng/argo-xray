@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk add curl
+RUN apk add curl unzip
 
 # Install Argo Tunnel Client
 RUN curl -fsSL https://github.com/cloudflare/cloudflared/releases/download/${ARGO_VERSION}/cloudflared-linux-amd64 -o /usr/bin/cloudflared
