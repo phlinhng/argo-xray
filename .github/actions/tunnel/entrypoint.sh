@@ -36,7 +36,7 @@ cat > "/xray-config.json" <<-EOF
       "settings": {
         "clients": [
           {
-            "uuid": "$XRAY_VLESS_UUID"
+            "id": "$XRAY_VLESS_UUID"
           }
         ]
       },
@@ -92,9 +92,6 @@ cat > "/xray-config.json" <<-EOF
       "outboundTag": "blocked"
       }
     ]
-  },
-  "log": {
-    "loglevel": "info"
   }
 }
 EOF
