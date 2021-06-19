@@ -15,7 +15,7 @@ wget https://github.com/cloudflare/cloudflared/releases/download/2021.5.10/cloud
 ```sh
 cloudflared tunnel login
 ```
-用浏览器打开给出的网址，登入你的 Cloudflare 帐户，授权一个区域使用 Argo Tunnel。成功后会在你的 Linux 环境生成一个`/root/.cloudflared/cert.pem`，保存 `/root/.cloudflared/cert.pem` 的内容，后面会用到。
+用浏览器打开给出的网址，登入你的 Cloudflare 帐户，授权一个区域使用 Argo Tunnel。成功后会在你的 Linux 环境生成一个`~/.cloudflared`目录。保存 `~/.cloudflared/cert.pem` 和 `~/.cloudflared/[tunnel-id].json` 的内容，后面会用到。
 ### 3. 建立一个隧道
 EXAMPLE_NAME 可以换成任意的自定义隧道名
 ```sh
@@ -35,6 +35,8 @@ cloudflared tunnel route dns EXAMPLE_NAME tunnel.your-domain.com
 | Name | Value | Source |
 |-|-|-|
 | ARGO_TUNNEL_TOKEN | 隧道密钥 | 2. 生成密钥 |
+| ARGO_TUNNEL_ID | 隧道 ID | 2. 生成密钥 |
+| ARGO_TUNNEL_CRED | 隧道凭证 | 2. 生成密钥 |
 | ARGO_TUNNEL_NAME | 隧道名称 | 3. 建立一个隧道 |
 | XRAY_TLS_CERT | xray 证书公钥 | 5. 获取回源证书 |
 | XRAY_TLS_KEY | xray 证书私钥 | 5. 获取回源证书 |
