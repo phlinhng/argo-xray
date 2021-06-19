@@ -20,7 +20,6 @@ jobs:
           echo "::set-output name=XRAY_VERSION::`curl -s https://api.github.com/repos/XTLS/xray-core/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"v(.*)".*/\1/'`"
         id: fetch-latest-tag
       - name: Run Argo Tunnel
-        with:
         uses: ./.github/actions/tunnel
         with:
           ARGO_TUNNEL_NAME: ${{ secrets.ARGO_TUNNEL_NAME }}
