@@ -21,7 +21,7 @@ EXAMPLE_NAME 可以换成任意的自定义隧道名
 ```sh
 cloudflared tunnel create EXAMPLE_NAME
 ```
-成功的话会出现 `Created tunnel EXAMPLE_NAME with id xxxx`
+成功的话会出现 `Created tunnel EXAMPLE_NAME with id xxxx`
 ### 4. 将建立的隧道绑定至域名
 Argo tunnel 会提供一个 *.cfargotunnel.com 域名，这个域名无法申请证书，我们需要将隧道绑定至刚才授权的区域。
 ```
