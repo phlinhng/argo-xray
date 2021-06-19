@@ -40,4 +40,4 @@ jobs:
       - name: Start server
         run: |
           ./xray run -config ./etc/xray-config.json &
-          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem run --url grpc://localhost:2083 argoxray
+          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem run --url wss://localhost:2083 argoxray
