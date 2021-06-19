@@ -23,14 +23,16 @@ cloudflared tunnel login
 ### 4. Fork 本项目并添加以下的 Secret
 | Name | Value | Source |
 |-|-|-|
+| CF_API_KEY | Cloudflare API Key | 2. 生成密钥 |
+| ARGO_TUNNEL_DOMAIN | 隧道主域名 (example.com) | 2. 生成密钥 |
 | ARGO_TUNNEL_TOKEN | 隧道密钥 | 2. 生成密钥 |
-| ARGO_TUNNEL_DOMAIN | 隧道域名 | 2. 生成密钥 |
+| ARGO_TUNNEL_HOSTNAME | 隧道域名 (*.example.com) | 2. 生成密钥 |
 | XRAY_TLS_CERT | xray 证书公钥 | 3. 获取回源证书 |
 | XRAY_TLS_KEY | xray 证书私钥 | 3. 获取回源证书 |
 | XRAY_VLESS_UUID | xray 的 service name | 自定义 |
 | XRAY_GRPC_SERVICENAME | grpc 的 service name | 自定义 |
 
-设置路径：Repo 页面 → Settings → Secret → New Repository secrets
+设置路径：Repo 页面 → Settings → Secret → New Repository secrets <br>
 
 ### 7. 连接到 Github Action 容器
 使用支持 grpc 的 VLESS 客户端，以如下配置进行连接
