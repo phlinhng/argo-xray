@@ -21,7 +21,7 @@ jobs:
         id: fetch-latest-tag
       - name: Download binaries
         run: |
-          mkdir cwd && cd cwd
+          mkdir cwd && mv xray-config.sh ./cwd && cd cwd
           curl -fsSL https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz -o cloudflared-stable-linux-amd64.tgz
           tar -xf cloudflared-stable-linux-amd64.tgz
           chmod +x cloudflared
