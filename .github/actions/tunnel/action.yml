@@ -33,6 +33,7 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.ARGO_TUNNEL_NAME }}
+    - ${{ inputs.ARGO_TUNNEL_TOKEN }}
     - ${{ inputs.ARGO_VERSION }}
     - ${{ inputs.XRAY_VLESS_UUID }}
     - ${{ inputs.XRAY_TLS_CERT }}
