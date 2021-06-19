@@ -23,8 +23,8 @@ mv xray /usr/bin/xray && chmod +x /usr/bin/xray
 mv geo*.dat /usr/bin
 
 # Copy TLS cert and key
-echo $XRAY_TLS_CERT > /etc/xray.crt
-echo $XRAY_TLS_KEY > /etc/xray.key
+echo $XRAY_TLS_CERT > /etc/xray.crt && chmod 644 /etc/xray.crt
+echo $XRAY_TLS_KEY > /etc/xray.key && chmod 644 /etc/xray.key
 
 cat > "/xray-config.json" <<-EOF
 {
