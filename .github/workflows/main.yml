@@ -33,4 +33,5 @@ jobs:
           bash xray-config.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_GRPC_SERVICENAME }}
       - name: Start Server
         run: |
-          ./xray run -config ./etc/xray-config.json
+          ./xray run -config ./etc/xray-config.json &
+          ./cloudflared --credentials-file ./.cloudflared/cert.pem ${{ secrets.ARGO_TUNNEL_NAME }} tunnel run --url tcp://localhost:2083 &
