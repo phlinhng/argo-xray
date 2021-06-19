@@ -46,7 +46,7 @@ cloudflared tunnel route dns EXAMPLE_NAME tunnel.your-domain.com
 ### 7. 连接到 Github Action 容器
 使用支持 grpc 的 VLESS 客户端，以如下配置进行连接
 > 入口地址: 你设定的 Argo 隧道域名 <br>
-> 端口: 443 <br>
+> 端口: 2083 <br>
 > 协议: VLESS <br>
 > UUID: 你设定的值 <br>
 > 传输方式: grpc <br>

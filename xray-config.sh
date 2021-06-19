@@ -9,7 +9,7 @@ cat > "./etc/xray-config.json" <<-EOF
     {
       "protocol": "vless",
       "listen": "0.0.0.0",
-      "port": 443,
+      "port": 2083,
       "settings": {
         "clients": [
           {

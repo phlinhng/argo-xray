@@ -25,14 +25,15 @@ jobs:
           curl -fsSL https://github.com/XTLS/xray-core/releases/download/v${{ steps.fetch-latest-tag.outputs.XRAY_VERSION }}/Xray-linux-64.zip -o Xray-linux-64.zip
           unzip -qq -o Xray-linux-64.zip
           chmod +x cloudflared && chmod +x xray
-          mkdir ./etc
-          echo "${{ secrets.ARGO_TUNNEL_TOKEN }}" > ./etc/cert.pem
+          mkdir ./.cloudflared
+          echo "${{ secrets.ARGO_TUNNEL_TOKEN }}" > ./.cloudflared/cert.pem
+          mkdir mkdir ./etc
           echo "${{ secrets.XRAY_TLS_CERT }}" > ./etc/xray.crt
           echo "${{ secrets.XRAY_TLS_KEY }}" > ./etc/xray.key
           bash xray-config.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_GRPC_SERVICENAME }}
       - name: Start Argo Tunnel
         run: |
-          ./cloudflared --help
+          ./cloudflared --credentials-file ./.cloudflared/cert.pem ${{ secrets.ARGO_TUNNEL_NAME }} tunnel run --url localhost:2083 &
       - name: Start Xray-Core
         run: |
           ./xray run -config ./etc/xray-config.json
