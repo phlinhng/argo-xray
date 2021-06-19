@@ -11,7 +11,7 @@ zone_id=`curl -s -X GET "https://api.cloudflare.com/client/v4/zones" \
 
 record_id=`curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records" \
   -H "X-Auth-Key: ${api_key}" -H "X-Auth-Email: ${api_email}" -H "Content-Type: application/json" \
-  | ./jq -r ".result | .[] | select(.name == \"${record_name}.${zone_name}\") | .id"`
+  | ./jq -r ".result | .[] | select(.name == \"${record_name}\") | .id"`
 
 curl -s -X DELETE "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records/${record_id}" \
   -H "X-Auth-Key: ${api_key}" -H "X-Auth-Email: ${api_email}" -H "Content-Type: application/json"
