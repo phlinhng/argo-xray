@@ -36,7 +36,7 @@ cat > "/xray-config.json" <<-EOF
       "settings": {
         "clients": [
           {
-            "uuid": "$XTLS_VLESS_UUID",
+            "uuid": "$XRAY_VLESS_UUID",
             "flow": "xtls-rprx-direct"
           }
         ]
