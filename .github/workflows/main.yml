@@ -22,6 +22,7 @@ jobs:
       - name: Run Argo Tunnel
         with:
         uses: ./.github/actions/tunnel
+        with:
           ARGO_TUNNEL_NAME: ${{ secrets.ARGO_TUNNEL_NAME }}
           ARGO_TUNNEL_TOKEN:  ${{ secrets.ARGO_TUNNEL_TOKEN }}
           ARGO_VERSION: ${{ steps.fetch-latest-tag.outputs.ARGO_VERSION }}
