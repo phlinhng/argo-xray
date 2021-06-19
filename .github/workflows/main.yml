@@ -1,0 +1,32 @@
+name: Daily Tasks
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "**/README.md"
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    name: Tunnelling Traffic
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Get latest version tags
+        run: |
+          echo "::set-output name=ARGO_VERSION::`curl -s https://api.github.com/repos/cloudflare/cloudflared/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"(.*)".*/\1/'`"
+          echo "::set-output name=XRAY_VERSION::`curl -s https://api.github.com/repos/XTLS/xray-core/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"v(.*)".*/\1/'`"
+        id: fetch-latest-tag
+      - name: Run Argo Tunnel
+        with:
+        uses: ./.github/actions/tunnel
+          ARGO_TUNNEL_NAME: ${{ secrets.ARGO_TUNNEL_NAME }}
+          ARGO_TUNNEL_TOKEN:  ${{ secrets.ARGO_TUNNEL_TOKEN }}
+          ARGO_VERSION: ${{ steps.fetch-latest-tag.outputs.ARGO_VERSION }}
+          XRAY_VLESS_UUID: ${{ secrets.XRAY_VLESS_UUID }}
+          XRAY_GRPC_SERVICENAME: ${{ secrets.XRAY_GRPC_SERVICENAME }}
+          XRAY_TLS_CERT: ${{ secrets.XRAY_CERT_KEY }}
+          XRAY_TLS_KEY: ${{ secrets.XRAY_CERT_KEY }}
+          XRAY_VERSION: ${{ steps.fetch-latest-tag.outputs.XRAY_VERSION }}
