@@ -3,8 +3,8 @@
 ARGO_TUNNEL_NAME=$1
 ARGO_VERSION=$2
 XRAY_VLESS_UUID=$3
-XRAY_XRAY_TLS_CERT=$4
-XRAY_XRAY_TLS_KEY=$5
+XRAY_TLS_CERT=$4
+XRAY_TLS_KEY=$5
 XRAY_GRPC_SERVICENAME=$6
 XRAY_VERSION=$7
 
@@ -23,8 +23,8 @@ mv xray /usr/bin/xray && chmod +x /usr/bin/xray
 mv geo*.dat /usr/bin
 
 # Copy TLS cert and key
-echo $XRAY_TLS_CERT > /etc/xray.crt && chmod 644 /etc/xray.crt
-echo $XRAY_TLS_KEY > /etc/xray.key && chmod 644 /etc/xray.key
+echo $XRAY_TLS_CERT > /etc/xray.crt
+echo $XRAY_TLS_KEY > /etc/xray.key
 
 cat > "/xray-config.json" <<-EOF
 {
@@ -97,5 +97,5 @@ cat > "/xray-config.json" <<-EOF
 }
 EOF
 
-xray run -config /xray-config.json
-#cloudflared tunnel run --url localhost:443 $ARGO_TUNNEL_NAME
+xray run -config /xray-config.json &
+cloudflared tunnel run --url localhost:443 $ARGO_TUNNEL_NAME &
