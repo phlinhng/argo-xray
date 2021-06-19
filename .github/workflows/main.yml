@@ -35,7 +35,8 @@ jobs:
         run: |
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem delete argoxray || true
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem create argoxray
+          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem route dns argoxray ${{ secrets.ARGO_TUNNEL_DOMAIN }}
       - name: Start server
         run: |
           ./xray run -config ./etc/xray-config.json &
-          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem --hostname ${{ secrets.ARGO_TUNNEL_DOMAIN }} run --url localhost:2083 argoxray
+          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem run --url localhost:2083 argoxray
