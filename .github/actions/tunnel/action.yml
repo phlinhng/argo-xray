@@ -35,7 +35,7 @@ runs:
     - ${{ inputs.ARGO_TUNNEL_NAME }}
     - ${{ inputs.ARGO_VERSION }}
     - ${{ inputs.XRAY_VLESS_UUID }}
-    - ${{ inputs.XRAY_XRAY_TLS_CERT }}
-    - ${{ inputs.XRAY_XRAY_TLS_KEY }}
+    - ${{ inputs.XRAY_TLS_CERT }}
+    - ${{ inputs.XRAY_TLS_KEY }}
     - ${{ inputs.XRAY_GRPC_SERVICENAME }}
     - ${{ inputs.XRAY_VERSION }}
