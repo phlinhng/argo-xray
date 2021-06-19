@@ -16,15 +16,28 @@ jobs:
         uses: actions/checkout@v2
       - name: Get latest version tags
         run: |
+          echo "::set-output name=ARGO_VERSION::`curl -s https://api.github.com/repos/cloudflare/cloudflared/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"(.*)".*/\1/'`"
           echo "::set-output name=XRAY_VERSION::`curl -s https://api.github.com/repos/XTLS/xray-core/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"v(.*)".*/\1/'`"
         id: fetch-latest-tag
-      - name: Run Argo Tunnel and Xray-Core
-        uses: ./.github/actions/tunnel
-        with:
-          ARGO_TUNNEL_NAME: ${{ secrets.ARGO_TUNNEL_NAME }}
-          ARGO_TUNNEL_TOKEN:  ${{ secrets.ARGO_TUNNEL_TOKEN }}
-          XRAY_VLESS_UUID: ${{ secrets.XRAY_VLESS_UUID }}
-          XRAY_GRPC_SERVICENAME: ${{ secrets.XRAY_GRPC_SERVICENAME }}
-          XRAY_TLS_CERT: ${{ secrets.XRAY_TLS_CERT }}
-          XRAY_TLS_KEY: ${{ secrets.XRAY_TLS_KEY }}
-          XRAY_VERSION: ${{ steps.fetch-latest-tag.outputs.XRAY_VERSION }}
+      - name: Download binaries
+        run: |
+          curl -fsSL https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz -o cloudflared-stable-linux-amd64.tgz
+          tar -xf cloudflared-stable-linux-amd64.tgz
+          mv cloudflared /usr/bin/cloudflared && chmod +x /usr/bin/cloudflared
+          curl -fsSL https://github.com/XTLS/xray-core/releases/download/v${{ steps.fetch-latest-tag.outputs.XRAY_VERSION }}/Xray-linux-64.zip -o Xray-linux-64.zip
+          unzip -qq -o Xray-linux-64.zip
+          mv xray /usr/bin/xray && chmod +x /usr/bin/xray
+          mv geo*.dat /usr/bin
+      - name: Prepare configurations
+        run: |
+          mkdir -p /root/.cloudflared
+          echo ${{ secrets.ARGO_TUNNEL_TOKEN }} > /root/.cloudflared/cert.pem
+          echo ${{ secrets.XRAY_TLS_CERT }} > /etc/xray.crt
+          echo ${{ secrets.XRAY_TLS_KEY }} > /etc/xray.key
+          bash xray-config.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_GRPC_SERVICENAME }}
+      - name: Start Argo Tunnel
+        run: |
+          /usr/bin/cloudflared tunnel run --url localhost:443 ${{ secrets.ARGO_TUNNEL_NAME }} &
+      - name: Start Xray-Core
+        run: |
+          xray run -config /xray-config.json
