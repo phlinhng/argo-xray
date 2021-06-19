@@ -35,7 +35,6 @@ cloudflared tunnel route dns EXAMPLE_NAME tunnel.your-domain.com
 | Name | Value | Source |
 |-|-|-|
 | ARGO_TUNNEL_TOKEN | 隧道密钥 | 2. 生成密钥 |
-| ARGO_TUNNEL_ID | 隧道 ID | 2. 生成密钥 |
 | ARGO_TUNNEL_CRED | 隧道凭证 | 2. 生成密钥 |
 | ARGO_TUNNEL_NAME | 隧道名称 | 3. 建立一个隧道 |
 | XRAY_TLS_CERT | xray 证书公钥 | 5. 获取回源证书 |
@@ -52,7 +51,7 @@ cloudflared tunnel route dns EXAMPLE_NAME tunnel.your-domain.com
 > 协议: VLESS <br>
 > UUID: 你设定的值 <br>
 > 传输方式: ws <br>
-> Service　Name: 你设定的值~<br>
+> Service　Name: 你设定的值<br>
 
 ## 注
 本项目仅供学习 Cloudflare Argo Tunnel 与 Github Action 的操作，所生成的隧道最长运行 1 小时且仅在 push 时触发，若有持续使用的需求请自行修改触发条件。请评估风险后合理使用本项目，任何因滥用本项目造成的后果均与本项目无关。
