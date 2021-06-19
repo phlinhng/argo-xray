@@ -31,13 +31,10 @@ jobs:
       - name: Prepare configurations
         run: |
           mkdir ./.cloudflared
-          echo "test1"
-          echo ${{ secrets.ARGO_TUNNEL_TOKEN }} > ./.cloudflared/cert.pem
+          echo "${{ secrets.ARGO_TUNNEL_TOKEN }}" > ./.cloudflared/cert.pem
           mkdir ./etc
-          echo "test2"
-          echo ${{ secrets.XRAY_TLS_CERT }} > ./etc/xray.crt
-          echo ${{ secrets.XRAY_TLS_KEY }} > ./etc/xray.key
-          echo "test3"
+          echo "${{ secrets.XRAY_TLS_CERT }}" > ./etc/xray.crt
+          echo "${{ secrets.XRAY_TLS_KEY }}" > ./etc/xray.key
           bash xray-config.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_GRPC_SERVICENAME }}
       - name: Start Argo Tunnel
         run: |
