@@ -59,7 +59,7 @@ cat > "/xray-config.json" <<-EOF
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": [ "http", "tls"]
+        "destOverride": ["http", "tls"]
       }
     }
   ],
