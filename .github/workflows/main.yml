@@ -25,8 +25,8 @@ jobs:
           curl -fsSL https://github.com/XTLS/xray-core/releases/download/v${{ steps.fetch-latest-tag.outputs.XRAY_VERSION }}/Xray-linux-64.zip -o Xray-linux-64.zip
           unzip -qq -o Xray-linux-64.zip
           chmod +x cloudflared && chmod +x xray
-          mkdir ./.cloudflared
-          echo "${{ secrets.ARGO_TUNNEL_TOKEN }}" > ./.cloudflared/cert.pem
+          mkdir ~/.cloudflared
+          echo "${{ secrets.ARGO_TUNNEL_TOKEN }}" > ~/.cloudflared/cert.pem
           mkdir ./etc
           echo "${{ secrets.XRAY_TLS_CERT }}" > ./etc/xray.crt
           echo "${{ secrets.XRAY_TLS_KEY }}" > ./etc/xray.key
