@@ -23,7 +23,8 @@ cloudflared tunnel login
 ### 4. Fork 本项目并添加以下的 Secret
 | Name | Value | Source |
 |-|-|-|
-| CF_API_KEY | Cloudflare API Key | 2. 生成密钥 |
+| CF_API_KEY | Cloudflare API Key | Cloudflare |
+| CF_API_EMAIL | Cloudflare Email | Cloudflare |
 | ARGO_TUNNEL_DOMAIN | 隧道主域名 (example.com) | 2. 生成密钥 |
 | ARGO_TUNNEL_TOKEN | 隧道密钥 | 2. 生成密钥 |
 | ARGO_TUNNEL_HOSTNAME | 隧道域名 (*.example.com) | 2. 生成密钥 |
