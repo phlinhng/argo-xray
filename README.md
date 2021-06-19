@@ -35,7 +35,7 @@ cloudflared tunnel login
 
 设置路径：Repo 页面 → Settings → Secret → New Repository secrets <br>
 
-### 7. 连接到 Github Action 容器
+### 5. 连接到 Github Action 容器
 使用支持 grpc 的 VLESS 客户端，以如下配置进行连接
 > 入口地址: 你设定的 Argo 隧道域名 <br>
 > 端口: 2083 <br>
