@@ -98,5 +98,5 @@ cat > "/xray-config.json" <<-EOF
 }
 EOF
 
-cloudflared tunnel run --url localhost:443 $ARGO_TUNNEL_NAME &
-xray run -config /xray-config.json
+cloudflared tunnel run --url localhost:443 $ARGO_TUNNEL_NAME
+#xray run -config /xray-config.json
