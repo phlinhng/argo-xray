@@ -27,6 +27,6 @@ jobs:
           ARGO_VERSION: ${{ steps.fetch-latest-tag.outputs.ARGO_VERSION }}
           XRAY_VLESS_UUID: ${{ secrets.XRAY_VLESS_UUID }}
           XRAY_GRPC_SERVICENAME: ${{ secrets.XRAY_GRPC_SERVICENAME }}
-          XRAY_TLS_CERT: ${{ secrets.XRAY_CERT_KEY }}
-          XRAY_TLS_KEY: ${{ secrets.XRAY_CERT_KEY }}
+          XRAY_TLS_CERT: ${{ secrets.XRAY_TLS_CERT }}
+          XRAY_TLS_KEY: ${{ secrets.XRAY_TLS_KEY }}
           XRAY_VERSION: ${{ steps.fetch-latest-tag.outputs.XRAY_VERSION }}
