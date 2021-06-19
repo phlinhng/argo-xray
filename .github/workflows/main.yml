@@ -1,4 +1,4 @@
-name: Daily Tasks
+name: Start a Tunnel
 on:
   push:
     branches:

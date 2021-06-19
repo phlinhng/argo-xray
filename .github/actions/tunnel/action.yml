@@ -1,4 +1,4 @@
-name: "Argo Tunnel"
+name: "cloudflared and xray"
 
 inputs:
   ARGO_TUNNEL_NAME:
