@@ -19,7 +19,7 @@ jobs:
         id: fetch-latest-tag
       - name: Download binaries
         run: |
-          mkdir cwd && cd cwd
+          mkdir cwd && cd ./cwd
           curl -fsSL https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz -o cloudflared-stable-linux-amd64.tgz
           tar -xf cloudflared-stable-linux-amd64.tgz
           chmod +x cloudflared
@@ -34,7 +34,7 @@ jobs:
           mkdir ./etc
           echo "${{ secrets.XRAY_TLS_CERT }}" > ./etc/xray.crt
           echo "${{ secrets.XRAY_TLS_KEY }}" > ./etc/xray.key
-          bash xray-config.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_GRPC_SERVICENAME }}
+          bash ./xray-config.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_GRPC_SERVICENAME }}
       - name: Start Argo Tunnel
         run: |
           cloudflared tunnel run --url localhost:443 ${{ secrets.ARGO_TUNNEL_NAME }} &
