@@ -9,8 +9,8 @@ XRAY_GRPC_SERVICENAME=$6
 XRAY_VERSION=$7
 
 # Install Argo Tunnel Client
-curl -fsSL cloudflared-stable-linux-386.tgz -o cloudflared-stable-linux-386.tgz
-tar -xf cloudflared-stable-linux-386.tgz
+curl -fsSL https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz -o cloudflared-stable-linux-amd64.tgz
+tar -xf cloudflared-stable-linux-amd64.tgz
 mv cloudflared /usr/bin/cloudflared && chmod +x /usr/bin/cloudflared
 
 # Copy Argo TLS Token
