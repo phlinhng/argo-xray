@@ -26,8 +26,8 @@ jobs:
           unzip -qq -o Xray-linux-64.zip
           chmod +x cloudflared && chmod +x xray
           mkdir ./.cloudflared
-          echo "${{ secrets.ARGO_TUNNEL_CRED }}" > ./.cloudflared/cred.json
-          echo "${{ secrets.ARGO_TUNNEL_TOKEN }}" > ./.cloudflared/cert.pem
+          printf "${{ secrets.ARGO_TUNNEL_CRED }}" > ./.cloudflared/cred.json
+          printf "${{ secrets.ARGO_TUNNEL_TOKEN }}" > ./.cloudflared/cert.pem
           mkdir mkdir ./etc
           echo "${{ secrets.XRAY_TLS_CERT }}" > ./etc/xray.crt
           echo "${{ secrets.XRAY_TLS_KEY }}" > ./etc/xray.key
