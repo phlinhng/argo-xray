@@ -1,0 +1,46 @@
+name: Start a Tunnel
+on:
+  push:
+    schedule:
+      - cron: "30 22 * * *"
+    branches:
+      - extra
+    paths-ignore:
+      - "**/README.md"
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    name: Fetch leatest releases
+    steps:
+      - name: Checkout branch "extra"
+        uses: actions/checkout@v2.3.4
+        with:
+          ref: extra
+      - name: Move files to publish directory
+        run: |
+          mkdir -p publish
+          mv * ./publish/
+      - name: Get latest version tags
+        run: |
+          echo "::set-output name=ARGO_VERSION::`curl -s https://api.github.com/repos/cloudflare/cloudflared/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"(.*)".*/\1/'`"
+          echo "::set-output name=XRAY_VERSION::`curl -s https://api.github.com/repos/XTLS/xray-core/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"v(.*)".*/\1/'`"
+      - name: Download latest releases
+        run: |
+          curl -fsSL https://github.com/cloudflare/cloudflared/releases/download/${{ steps.fetch-latest-tag.outputs.ARGO_VERSION }}/cloudflared-linux-amd64 -o cloudflared
+          curl -fsSL https://github.com/XTLS/xray-core/releases/download/v${{ steps.fetch-latest-tag.outputs.XRAY_VERSION }}/Xray-linux-64.zip -o Xray-linux-64.zip
+          unzip -qq -o Xray-linux-64.zip
+          chmod +x cloudflared && chmod +x xray
+      - name: Move files to publish directory
+        run: |
+          install -p {cloudflared,geoip.dat,geosite.dat,xray} ./publish/
+      - name: Git push assets to branch "runtime"
+        run: |
+          cd publish
+          git init
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b runtime
+          git add . && git commit -m "`date`"
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          git push -f origin runtime
