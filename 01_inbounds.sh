@@ -3,7 +3,7 @@
 XRAY_VLESS_UUID=$1
 XRAY_VLESS_WSPATH=$2
 
-cat > "./xray/01_inbounds.json" <<-EOF
+cat > "./etc/xray/01_inbounds.json" <<-EOF
 {
   "inbounds": [
     {
