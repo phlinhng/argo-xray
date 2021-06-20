@@ -25,8 +25,8 @@ jobs:
           echo "${{ secrets.XRAY_TLS_KEY }}" > ./ssl/xray.key
           mkdir ./etc
           bash 01_inbounds.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_VLESS_WSPATH }}
-          cat 02_outbounds.json > ./etc/02_outbounds.json
-          cat 03_routing.json > ./etc/03_routing.json
+          cat 02_outbounds.json > ./etc/xray/02_outbounds.json
+          cat 03_routing.json > ./etc/xray/03_routing.json
       - name: Create tunnel
         run: |
           bash reset-dns.sh  ${{ secrets.ARGO_TUNNEL_DOMAIN }} ${{ secrets.ARGO_TUNNEL_HOSTNAME }} ${{ secrets.CF_API_TOKEN }}
@@ -35,5 +35,5 @@ jobs:
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem route dns argoxray ${{ secrets.ARGO_TUNNEL_HOSTNAME }}
       - name: Start server
         run: |
-          ./xray run -confdir ./etc &
+          ./xray run -confdir ./etc/xray &
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem run --url https://localhost:2083 argoxray
