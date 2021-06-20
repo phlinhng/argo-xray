@@ -36,8 +36,8 @@ cat > "./xray/01_inbounds.json" <<-EOF
           "maxVersion": "1.3",
           "certificates": [
             {
-              "certificateFile": "./etc/xray.crt",
-              "keyFile": "./etc/xray.key"
+              "certificateFile": "./ssl/xray.crt",
+              "keyFile": "./ssl/xray.key"
             }
           ]
         }

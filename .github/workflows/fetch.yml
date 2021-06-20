@@ -32,7 +32,7 @@ jobs:
           curl -fsSL https://github.com/cloudflare/cloudflared/releases/download/${{ steps.fetch-latest-tag.outputs.ARGO_VERSION }}/cloudflared-linux-amd64 -o cloudflared
           curl -fsSL https://github.com/XTLS/xray-core/releases/download/v${{ steps.fetch-latest-tag.outputs.XRAY_VERSION }}/Xray-linux-64.zip -o Xray-linux-64.zip
           unzip -qq -o Xray-linux-64.zip
-          chmod +x cloudflared && chmod +x xray
+          chmod +x cloudflared && chmod +x xray && chmod +x jq
       - name: Move files to publish directory
         run: |
           install -p {cloudflared,geoip.dat,geosite.dat,xray} ./publish
