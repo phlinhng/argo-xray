@@ -59,7 +59,7 @@ cat > "./xray/01_inbounds.json" <<-EOF
         "network": "ws",
         "security": "none"
         },
-        "grpcSettings": {
+        "wsSettings": {
           "path": "$XRAY_VLESS_WSPATH"
         }
       },
