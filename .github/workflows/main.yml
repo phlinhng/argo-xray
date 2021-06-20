@@ -1,4 +1,4 @@
-name: Start a Tunnel
+name: Start a tunnel
 on:
   workflow_dispatch:
 
