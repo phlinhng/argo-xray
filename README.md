@@ -38,12 +38,12 @@ cloudflared tunnel login
 
 ### 4. 连接到 Github Action 容器
 使用支持 ws 的 VLESS 客户端，以如下配置进行连接
-> 地址: 你设定的 Argo 隧道域名 or CF 自选 IP<br>
+> 地址: Argo 隧道域名 or CF 自选 IP<br>
 > 端口: 2083 <br>
 > 协议: VLESS <br>
 > UUID: 你设定的值 <br>
 > 传输方式: ws <br>
-> host: 你设定的 Argo 隧道域名 <br>
+> host: Argo 隧道域名 <br>
 > path: 你设定的值<br>
 
 ## Future works
