@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - extra
-  fork:
   workflow_dispatch:
 
 jobs:
