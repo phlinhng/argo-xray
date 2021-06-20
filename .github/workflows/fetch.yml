@@ -4,7 +4,6 @@ on:
     - cron: "30 22 * * *"
   push:
     branches:
-      - main
       - extra
     paths-ignore:
       - "**/README.md"
@@ -20,8 +19,9 @@ jobs:
           ref: extra
       - name: Move files to publish directory
         run: |
+          shopt -s extglob
           mkdir -p publish
-          install -p * ./publish/
+          mv !(publish) ./publish
       - name: Get latest version tags
         run: |
           echo "::set-output name=ARGO_VERSION::`curl -s https://api.github.com/repos/cloudflare/cloudflared/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"(.*)".*/\1/'`"
@@ -34,7 +34,7 @@ jobs:
           chmod +x cloudflared && chmod +x xray
       - name: Move files to publish directory
         run: |
-          install -p {cloudflared,geoip.dat,geosite.dat,xray} ./publish/
+          install -p {cloudflared,geoip.dat,geosite.dat,xray} ./publish
       - name: Git push assets to branch "runtime"
         run: |
           cd publish
