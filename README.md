@@ -1,8 +1,6 @@
 # Github Action Network Tunnel
 Use github action and argo tunnel to create temporary network tunnel.
 
-我是技术爱好者不是技术教学爱好者，看不懂自己想办法不要问我。
-
 ## Prerequisites
 + 能连上 Cloudflare 的电脑或 VPS（用于申请 Argo Tunnel 密钥）
 + 绑定到 Cloudflare 的域名（受 API 限制，不可用 .cf, .ga, .gq, .ml, or .tk 结尾的域名）
