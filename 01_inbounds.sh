@@ -2,6 +2,7 @@
 
 XRAY_VLESS_UUID=$1
 XRAY_VLESS_WSPATH=$2
+ARGO_TUNNEL_HOSTNAME=$3
 
 cat > "./etc/xray/01_inbounds.json" <<-EOF
 {
@@ -31,7 +32,8 @@ cat > "./etc/xray/01_inbounds.json" <<-EOF
         "network": "tcp",
         "security": "tls",
         "tlsSettings": {
-          "alpn":["http/1.1"],
+          "serverName": "$ARGO_TUNNEL_HOSTNAME",
+          "alpn": ["http/1.1"],
           "minVersion": "1.2",
           "maxVersion": "1.3",
           "certificates": [
