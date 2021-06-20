@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: extra
       - name: Get latest version tags
         run: |
           echo "::set-output name=ARGO_VERSION::`curl -s https://api.github.com/repos/cloudflare/cloudflared/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"(.*)".*/\1/'`"
@@ -27,17 +29,20 @@ jobs:
           chmod +x cloudflared && chmod +x xray
           mkdir ./.cloudflared
           echo "${{ secrets.ARGO_TUNNEL_TOKEN }}" > ./.cloudflared/cert.pem
-          mkdir mkdir ./etc
-          echo "${{ secrets.XRAY_TLS_CERT }}" > ./etc/xray.crt
-          echo "${{ secrets.XRAY_TLS_KEY }}" > ./etc/xray.key
-          bash xray-config.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_GRPC_SERVICENAME }}
+          mkdir ./ssl
+          echo "${{ secrets.XRAY_TLS_CERT }}" > ./ssl/xray.crt
+          echo "${{ secrets.XRAY_TLS_KEY }}" > ./ssl/xray.key
+          mkdir ./xray
+          bash 01_inbounds.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_VLESS_WSPATH }}
+          cat 02_outbounds.json > ./xray/02_outbounds.json
+          cat 03_routing.json > ./xray/03_routing.json
       - name: Create tunnel
         run: |
-          bash reset-dns.sh  ${{ secrets.ARGO_TUNNEL_DOMAIN }} ${{ secrets.ARGO_TUNNEL_HOSTNAME }} ${{ secrets.CF_API_KEY }} ${{ secrets.CF_API_EMAIL }}
+          bash reset-dns.sh  ${{ secrets.ARGO_TUNNEL_DOMAIN }} ${{ secrets.ARGO_TUNNEL_HOSTNAME }} ${{ secrets.CF_API_TOKEN }}
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem delete -f argoxray || true
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem create argoxray
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem route dns argoxray ${{ secrets.ARGO_TUNNEL_HOSTNAME }}
       - name: Start server
         run: |
-          ./xray run -config ./etc/xray-config.json &
-          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem run --url tcp://localhost:2083 argoxray
+          ./xray run -confdir ./xray &
+          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem run --url https://localhost:2083 argoxray

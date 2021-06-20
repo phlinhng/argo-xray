@@ -29,20 +29,20 @@ cloudflared tunnel login
 | ARGO_TUNNEL_DOMAIN | 隧道主域名 | 2. 生成密钥 | example.com |
 | ARGO_TUNNEL_TOKEN | 隧道密钥 | 2. 生成密钥 | |
 | ARGO_TUNNEL_HOSTNAME | 隧道域名 | 2. 生成密钥 | tunnel.example.com |
-| XRAY_TLS_CERT | xray 证书公钥 | 3. 获取回源证书 | |
-| XRAY_TLS_KEY | xray 证书私钥 | 3. 获取回源证书 | |
+| XRAY_TLS_CERT | xray 证书公钥 | 4. 获取回源证书 | |
+| XRAY_TLS_KEY | xray 证书私钥 | 4. 获取回源证书 | |
 | XRAY_VLESS_UUID | xray 的 uuid | 自定义 | 8f32f6da-f296-4cf6-aa2d-6077a3dd1308 |
-| XRAY_VLESS_WSPATH | grpc 的 service name | /myargo |
+| XRAY_VLESS_WSPATH | xray 的 path | /myargo |
 
 设置路径：Repo 页面 → Settings → Secret → New Repository secrets <br>
 
 ### 5. 连接到 Github Action 容器
-使用支持 grpc 的 VLESS 客户端，以如下配置进行连接
+使用支持 ws 的 VLESS 客户端，以如下配置进行连接
 > 入口地址: 你设定的 Argo 隧道域名 <br>
 > 端口: 2083 <br>
 > 协议: VLESS <br>
 > UUID: 你设定的值 <br>
-> 传输方式: grpc <br>
+> 传输方式: ws <br>
 > path: 你设定的值<br>
 
 ## 注
