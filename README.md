@@ -1,8 +1,6 @@
 # Github Action Network Tunnel
 Use github action and argo tunnel to create temporary network tunnel.
 
-由于 Github Action 需要在 Github 上调试，你看到此页面时我可能还在 debug，不要哭爸哭母为什么不能用。
-
 我是技术爱好者不是技术教学爱好者，看不懂自己想办法不要问我。
 
 ## Prerequisites
