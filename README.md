@@ -43,7 +43,7 @@ cloudflared tunnel login
 > 协议: VLESS <br>
 > UUID: 你设定的值 <br>
 > 传输方式: ws <br>
-> host: 你设定的 Argo 隧道域名
+> host: 你设定的 Argo 隧道域名 <br>
 > path: 你设定的值<br>
 
 ## Future works
