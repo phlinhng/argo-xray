@@ -1,4 +1,4 @@
-name: Start a Tunnel
+name: Fetch leatest releases
 on:
   schedule:
     - cron: "30 22 * * *"
