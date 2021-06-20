@@ -5,8 +5,8 @@ on:
   push:
     branches:
       - extra
-    paths-ignore:
-      - "**/README.md"
+  fork:
+  workflow_dispatch:
 
 jobs:
   main:
