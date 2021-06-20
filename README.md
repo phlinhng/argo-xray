@@ -54,4 +54,4 @@ cloudflared tunnel login
 ## Note
 **FAIR USE ONLY.** DO NOT ABUSE THIS PROJECT WITH ILLEGAL PURPOSE OR ANYTHING DISOBEYING TOS OF GITHUB OR CLOUDFLARE. THE AUTHOR OF THIS REPOSITORY GIVE NO WARRANTY FOR ANY RESULT CAUSING BY ABUSE.
 
-本项目仅供学习 Cloudflare Argo Tunnel 与 Github Action 的操作与运行原理，所生成的隧道最长运行 1 小时且仅在 push 时触发，若有持续使用的需求请自行修改触发条件。请评估风险后合理使用本项目，任何因滥用本项目造成的后果均与本项目无关。
+本项目仅供学习 Cloudflare Argo Tunnel 与 Github Action 的操作与运行原理，所生成的隧道默认运行 1 小时且仅能手动触发，若有持续使用的需求请自行修改触发条件。请评估风险后合理使用本项目，任何因滥用本项目造成的后果均与本项目无关。

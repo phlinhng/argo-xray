@@ -1,16 +1,17 @@
 name: Start a Tunnel
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - "**/README.md"
+  workflow_dispatch:
+    inputs:
+      timeout:
+        description: "Timeout (minutes)"
+        required: false
+        default: 60
 
 jobs:
   main:
     runs-on: ubuntu-latest
     name: Tunnelling Traffic
-    timeout-minutes: 60
+    timeout-minutes: "${{ github.event.inputs.timeout }}"
     steps:
       - name: Checkout branch "runtime"
         uses: actions/checkout@v2.3.4
