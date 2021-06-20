@@ -16,22 +16,23 @@ wget https://github.com/cloudflare/cloudflared/releases/download/2021.5.10/cloud
 cloudflared tunnel login
 ```
 用浏览器打开给出的网址，登入你的 Cloudflare 帐户，授权一个区域使用 Argo Tunnel。成功后会在你的 Linux 环境生成一个`~/.cloudflared`目录。保存 `~/.cloudflared/cert.pem` 和 `~/.cloudflared/[tunnel-id].json` 的内容，后面会用到。
-### 3. 获取回源证书
+### 3. 生成 API 令牌
+建立一个 CF 的 API Token，权限设置为 **DNS: Edit; Zone: Read**。
+### 4. 获取回源证书
 因为我们要透过 Cloudflare 访问源站，申请 Cloudflare 的回源证书就够了（就是传说中的 15 年证书），推荐 key type 选 ECC。保存 PEM 类型的证书和私钥，后面会用到
 
 ## 使用方法
 ### 4. Fork 本项目并添加以下的 Secret
-| Name | Value | Source |
-|-|-|-|
-| CF_API_KEY | Cloudflare API Key | Cloudflare |
-| CF_API_EMAIL | Cloudflare Email | Cloudflare |
-| ARGO_TUNNEL_DOMAIN | 隧道主域名 (example.com) | 2. 生成密钥 |
-| ARGO_TUNNEL_TOKEN | 隧道密钥 | 2. 生成密钥 |
-| ARGO_TUNNEL_HOSTNAME | 隧道域名 (*.example.com) | 2. 生成密钥 |
-| XRAY_TLS_CERT | xray 证书公钥 | 3. 获取回源证书 |
-| XRAY_TLS_KEY | xray 证书私钥 | 3. 获取回源证书 |
-| XRAY_VLESS_UUID | xray 的 service name | 自定义 |
-| XRAY_GRPC_SERVICENAME | grpc 的 service name | 自定义 |
+| Name | Value | Source | Example |
+|-|-|-| - |
+| CF_API_TOKEN | API Token | 3. 生成 API 令牌 | |
+| ARGO_TUNNEL_DOMAIN | 隧道主域名 | 2. 生成密钥 | example.com |
+| ARGO_TUNNEL_TOKEN | 隧道密钥 | 2. 生成密钥 | |
+| ARGO_TUNNEL_HOSTNAME | 隧道域名 | 2. 生成密钥 | tunnel.example.com |
+| XRAY_TLS_CERT | xray 证书公钥 | 3. 获取回源证书 | |
+| XRAY_TLS_KEY | xray 证书私钥 | 3. 获取回源证书 | |
+| XRAY_VLESS_UUID | xray 的 uuid | 自定义 | 8f32f6da-f296-4cf6-aa2d-6077a3dd1308 |
+| XRAY_VLESS_WSPATH | grpc 的 service name | /myargo |
 
 设置路径：Repo 页面 → Settings → Secret → New Repository secrets <br>
 
