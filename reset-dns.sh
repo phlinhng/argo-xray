@@ -14,6 +14,6 @@ record_id=`curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${zone_id}
   | ./jq -r ".result | .[] | select(.name == \"${record_name}\") | .id"`
 
 curl -s -X DELETE "https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records/${record_id}" \
-  -H "X-Auth-Key: ${api_key}" -H "X-Auth-Email: ${api_email}" -H "Content-Type: application/json"
+  -H "X-Auth-Key: ${api_key}" -H "X-Auth-Email: ${api_email}" -H "Content-Type: application/json" >/dev/null 2>&1
 
 exit
