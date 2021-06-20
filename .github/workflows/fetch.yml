@@ -24,12 +24,12 @@ jobs:
           mv !(publish) ./publish
       - name: Get latest version tags
         run: |
-          echo "::set-output name=ARGO_VERSION::`curl -s https://api.github.com/repos/cloudflare/cloudflared/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"(.*)".*/\1/'`"
-          echo "::set-output name=XRAY_VERSION::`curl -s https://api.github.com/repos/XTLS/xray-core/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"v(.*)".*/\1/'`"
+          echo "ARGO_VERSION=`curl -s https://api.github.com/repos/cloudflare/cloudflared/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"(.*)".*/\1/'`" >> $GITHUB_ENV
+          echo "XRAY_VERSION=`curl -s https://api.github.com/repos/XTLS/xray-core/releases/latest | tac | tac | grep tag_name | sed -E 's/.*"v(.*)".*/\1/'`" >> $GITHUB_ENV
       - name: Download latest releases
         run: |
-          curl -fsSL https://github.com/cloudflare/cloudflared/releases/download/${{ steps.fetch-latest-tag.outputs.ARGO_VERSION }}/cloudflared-linux-amd64 -o cloudflared
-          curl -fsSL https://github.com/XTLS/xray-core/releases/download/v${{ steps.fetch-latest-tag.outputs.XRAY_VERSION }}/Xray-linux-64.zip -o Xray-linux-64.zip
+          curl -fsSL https://github.com/cloudflare/cloudflared/releases/download/${ARGO_VERSION}/cloudflared-linux-amd64 -o cloudflared
+          curl -fsSL https://github.com/XTLS/xray-core/releases/download/v${XRAY_VERSION}/Xray-linux-64.zip -o Xray-linux-64.zip
           unzip -qq -o Xray-linux-64.zip
           chmod +x cloudflared && chmod +x xray
       - name: Move files to publish directory
