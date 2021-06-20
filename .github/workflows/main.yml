@@ -21,10 +21,9 @@ jobs:
           mkdir ./.cloudflared
           echo "${{ secrets.ARGO_TUNNEL_TOKEN }}" > ./.cloudflared/cert.pem
           mkdir ./ssl
-          echo "${{ secrets.XRAY_TLS_CERT }}" > ./ssl/xray.crt
-          echo "${{ secrets.XRAY_TLS_KEY }}" > ./ssl/xray.key
+          openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -subj "/C=US/ST=Oregon/L=Portland/O=Company Name/OU=Org/CN=${{ secrets.ARGO_TUNNEL_HOSTNAME }},*.${{ secrets.ARGO_TUNNEL_DOMAIN }}" -keyout ./ssl/xray.key -out ./ssl/xray.crt
           mkdir -p ./etc/xray
-          bash 01_inbounds.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_VLESS_WSPATH }}
+          bash 01_inbounds.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_VLESS_WSPATH }} ${{ secrets.ARGO_TUNNEL_HOSTNAME }}
           cat 02_outbounds.json > ./etc/xray/02_outbounds.json
           cat 03_routing.json > ./etc/xray/03_routing.json
       - name: Create tunnel
@@ -36,4 +35,4 @@ jobs:
       - name: Start server
         run: |
           ./xray run -confdir ./etc/xray &
-          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem run --url https://localhost:2083 --no-tls-verify argoxray
+          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem run --url https://localhost:2083 --http-host-header ${{ secrets.ARGO_TUNNEL_HOSTNAME }} --no-tls-verify argoxray

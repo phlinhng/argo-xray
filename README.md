@@ -19,8 +19,6 @@ cloudflared tunnel login
 ### 3. 取得 CF Global API Key
 ~~建立一个 CF 的 API Token，权限设置为 **DNS: Edit; Zone: Read**。~~
 由于需要删除 DNS 纪录的权限，目前只能用 Global API Key。
-### 4. 获取回源证书
-因为我们要透过 Cloudflare 访问源站，申请 Cloudflare 的回源证书就够了（就是传说中的 15 年证书），推荐 key type 选 ECC。保存 PEM 类型的证书和私钥，后面会用到
 
 ## 使用方法
 ### 4. Fork 本项目并添加以下的 Secret
@@ -31,8 +29,6 @@ cloudflared tunnel login
 | ARGO_TUNNEL_DOMAIN | 隧道主域名 | 2. 生成密钥 | example.com |
 | ARGO_TUNNEL_TOKEN | 隧道密钥 | 2. 生成密钥 | |
 | ARGO_TUNNEL_HOSTNAME | 隧道域名 | 2. 生成密钥 | tunnel.example.com |
-| XRAY_TLS_CERT | xray 证书公钥 | 4. 获取回源证书 | |
-| XRAY_TLS_KEY | xray 证书私钥 | 4. 获取回源证书 | |
 | XRAY_VLESS_UUID | xray 的 uuid | 自定义 | 8f32f6da-f296-4cf6-aa2d-6077a3dd1308 |
 | XRAY_VLESS_WSPATH | xray 的 path | /myargo |
 
