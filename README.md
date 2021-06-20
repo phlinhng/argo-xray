@@ -43,7 +43,7 @@ cloudflared tunnel login
 > 协议: VLESS <br>
 > UUID: 你设定的值 <br>
 > 传输方式: grpc <br>
-> Service　Name: 你设定的值<br>
+> path: 你设定的值<br>
 
 ## 注
 本项目仅供学习 Cloudflare Argo Tunnel 与 Github Action 的操作，所生成的隧道最长运行 1 小时且仅在 push 时触发，若有持续使用的需求请自行修改触发条件。请评估风险后合理使用本项目，任何因滥用本项目造成的后果均与本项目无关。
