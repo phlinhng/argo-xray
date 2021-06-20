@@ -28,8 +28,8 @@ cloudflared tunnel login
 ### 3. Fork 本项目并添加以下的 Secret
 | Name | Value | Source | Example |
 |-|-|-| - |
-| CF_API_KEY | Cloudflare API Key | 2 取得 CF API Key | 8f32f6daf2964cf6aa2d6077a3dd1308 |
-| CF_API_EMAIL | Cloudflare Email | 2. 取得 CF API Key | abc@example.com |
+| CF_API_KEY | CF API Key | 2 取得 CF API Key | 8f32f6daf2964cf6aa2d6077a3dd1308 |
+| CF_API_EMAIL | CF Email | 2. 取得 CF API Key | abc@example.com |
 | ARGO_TUNNEL_DOMAIN | 隧道主域名 | 1. 生成密钥 | example.com |
 | ARGO_TUNNEL_TOKEN | 隧道密钥 | 1. 生成密钥 | content of `~/.cloudflared/cert.pem` |
 | ARGO_TUNNEL_HOSTNAME | 隧道域名 | 1. 生成密钥 | tunnel.example.com |
