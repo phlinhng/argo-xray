@@ -59,9 +59,8 @@ cat > "./etc/xray/01_inbounds.json" <<-EOF
       },
       "streamSettings": {
         "network": "ws",
-        "security": "none"
-        },
-      "wsSettings": {
+        "security": "none",
+        "wsSettings": {
           "path": "$XRAY_VLESS_WSPATH"
         }
       },
