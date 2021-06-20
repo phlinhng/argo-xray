@@ -23,7 +23,7 @@ jobs:
           mkdir ./ssl
           echo "${{ secrets.XRAY_TLS_CERT }}" > ./ssl/xray.crt
           echo "${{ secrets.XRAY_TLS_KEY }}" > ./ssl/xray.key
-          mkdir ./etc
+          mkdir -p ./etc/xray
           bash 01_inbounds.sh ${{ secrets.XRAY_VLESS_UUID }} ${{ secrets.XRAY_VLESS_WSPATH }}
           cat 02_outbounds.json > ./etc/xray/02_outbounds.json
           cat 03_routing.json > ./etc/xray/03_routing.json
