@@ -1,8 +1,8 @@
 name: Start a Tunnel
 on:
+  schedule:
+    - cron: "30 22 * * *"
   push:
-    schedule:
-      - cron: "30 22 * * *"
     branches:
       - main
       - extra
