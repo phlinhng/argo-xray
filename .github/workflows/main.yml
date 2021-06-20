@@ -26,11 +26,8 @@ jobs:
         run: |
           bash reset-dns.sh  ${{ secrets.ARGO_TUNNEL_DOMAIN }} ${{ secrets.ARGO_TUNNEL_HOSTNAME }}  ${{ secrets.CF_API_KEY }} ${{ secrets.CF_API_EMAIL }}
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem cleanup argoxray || true
-          bash reset-dns.sh  ${{ secrets.ARGO_TUNNEL_DOMAIN }} ${{ secrets.ARGO_TUNNEL_HOSTNAME }}  ${{ secrets.CF_API_KEY }} ${{ secrets.CF_API_EMAIL }}
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem delete -f argoxray || true
-          bash reset-dns.sh  ${{ secrets.ARGO_TUNNEL_DOMAIN }} ${{ secrets.ARGO_TUNNEL_HOSTNAME }}  ${{ secrets.CF_API_KEY }} ${{ secrets.CF_API_EMAIL }}
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem create argoxray
-          bash reset-dns.sh  ${{ secrets.ARGO_TUNNEL_DOMAIN }} ${{ secrets.ARGO_TUNNEL_HOSTNAME }}  ${{ secrets.CF_API_KEY }} ${{ secrets.CF_API_EMAIL }}s
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem route dns argoxray ${{ secrets.ARGO_TUNNEL_HOSTNAME }}
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem cleanup argoxray || true
       - name: Start server
@@ -40,6 +37,7 @@ jobs:
   post:
     runs-on: ubuntu-latest
     name: Closing session
+    needs: main
     steps:
       - name: Checkout branch "runtime"
         uses: actions/checkout@v2.3.4
@@ -51,10 +49,6 @@ jobs:
           echo "${{ secrets.ARGO_TUNNEL_TOKEN }}" > ./.cloudflared/cert.pem
       - name: Destory tunnel
         run: |
-          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem cleanup argoxray || true
           bash reset-dns.sh  ${{ secrets.ARGO_TUNNEL_DOMAIN }} ${{ secrets.ARGO_TUNNEL_HOSTNAME }}  ${{ secrets.CF_API_KEY }} ${{ secrets.CF_API_EMAIL }}
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem cleanup argoxray || true
-          bash reset-dns.sh  ${{ secrets.ARGO_TUNNEL_DOMAIN }} ${{ secrets.ARGO_TUNNEL_HOSTNAME }}  ${{ secrets.CF_API_KEY }} ${{ secrets.CF_API_EMAIL }}
-          ./cloudflared tunnel --origincert ./.cloudflared/cert.pem delete -f argoxray || true
-          bash reset-dns.sh  ${{ secrets.ARGO_TUNNEL_DOMAIN }} ${{ secrets.ARGO_TUNNEL_HOSTNAME }}  ${{ secrets.CF_API_KEY }} ${{ secrets.CF_API_EMAIL }}
           ./cloudflared tunnel --origincert ./.cloudflared/cert.pem delete -f argoxray || true
