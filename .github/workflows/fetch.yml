@@ -4,6 +4,7 @@ on:
     schedule:
       - cron: "30 22 * * *"
     branches:
+      - main
       - extra
     paths-ignore:
       - "**/README.md"
