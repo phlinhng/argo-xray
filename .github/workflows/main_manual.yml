@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       timeout:
-        description: 'Timeout (min)'
+        description: 'Timeout (minutes)'
         required: true
         default: 60
 
